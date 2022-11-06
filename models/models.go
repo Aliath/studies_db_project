@@ -16,6 +16,8 @@ type Episode struct {
 	Description     string
 	Duration        int
 	PublicationDate time.Time
+
+	Season Season `gorm:"foreignKey:SeasonID"`
 }
 
 type Season struct {
@@ -23,13 +25,17 @@ type Season struct {
 	SeriesID int
 	Number   int
 	Name     string
+
+	Series Series `gorm:"foreignKey:SeriesID"`
 }
 
 type Series struct {
 	ID          int
 	Name        string
 	Description string
-	GenreId     int
+	GenreID     int
+
+	Genre Genre `gorm:"foreignKey:GenreID"`
 }
 
 type EpisodeReview struct {
@@ -39,6 +45,9 @@ type EpisodeReview struct {
 	Review     string
 	Rate       int
 	CreatedAt  time.Time
+
+	Episode  Episode `gorm:"foreignKey:EpisodeID"`
+	Reviewer User    `gorm:"foreignKey:ReviewerID"`
 }
 
 type User struct {
@@ -60,4 +69,7 @@ type Genre struct {
 type ActorsEpisodesAssociation struct {
 	ActorID   int
 	EpisodeID int
+
+	Actor   Actor   `gorm:"foreignKey:ActorID"`
+	Episode Episode `gorm:"foreignKey:EpisodeID"`
 }

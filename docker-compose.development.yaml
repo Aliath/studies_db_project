@@ -1,0 +1,9 @@
+version: '3.7'
+services:
+  postgres:
+    image: 'postgres:12'
+    ports:
+      - '4201:5432'
+    environment:
+      - POSTGRES_PASSWORD=164197
+      - POSTGRES_DB=studies_db_project
